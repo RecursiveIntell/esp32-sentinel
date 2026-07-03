@@ -1,0 +1,60 @@
+# Rust
+/target/
+**/*.rs.bk
+Cargo.lock.bak
+
+# Cargo workspace build artifacts
+**/target/
+**/Cargo.lock
+
+# PlatformIO (ESP32)
+/.pio/
+/.pioenvs/
+/.piolibdeps/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+venv/
+env/
+.pytest_cache/
+.coverage
+htmlcov/
+*.egg-info/
+dist/
+build/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+.idea/
+.vscode/
+*.iml
+
+# Logs
+*.log
+logs/
+
+# Local secrets / config
+.env
+.env.local
+*.local
+
+# Receipts (kept private)
+*.receipt.json
+receipts/
+
+# Build / flash artifacts
+*.bin.tmp
+*.elf
+*.hex
+
+# Worked example output (regenerated on every run)
+examples/*/out.jsonl

@@ -1,0 +1,50 @@
+{
+  "model_id": "char_lstm_709ff8a9",
+  "schema": "rilm_v1_p7_h512",
+  "description": "Char-level LSTM TinyStories-class model (6.34M params) trained on a small local corpus. Deployed on ESP32-S3 Freenove WROOM N8R8.",
+  "architecture": {
+    "type": "char_lstm",
+    "vocab_size": 33,
+    "vocab_chars": "abcdefghijklmnopqrstuvwxyz .,!?\n'",
+    "hidden": 512,
+    "layers": 3,
+    "embed_dim": 512,
+    "params": 6337569
+  },
+  "quantization": {
+    "format": "rilm_v1",
+    "weight_ih_dtype": "int8",
+    "weight_hh_dtype": "int4",
+    "bias_dtype": "float32",
+    "weight_compression_ratio": 4.0
+  },
+  "weight_file": {
+    "path": "models/char_lstm_709ff8a9.bin",
+    "bytes": 4785276,
+    "sha256": "709ff8a921612f0d1a075ce586d3355c895b16a100d12d8f74bb3367cdf83c61"
+  },
+  "training": {
+    "date_utc": "2026-07-03",
+    "corpus": "small local TinyStories-style story corpus (~7K chars, repeated 160x)",
+    "steps": 5000,
+    "final_loss_per_token": 0.0036083,
+    "smooth_loss_per_token": 0.058559
+  },
+  "hardware_verification": {
+    "board": "ESP32-S3 Freenove WROOM N8R8",
+    "psram_bytes": 8388608,
+    "weights_partition_addr": "0x210000",
+    "weights_partition_size": 5242880,
+    "boot_receipt": "MODEL_READY profile=tinystories_h512_mixed_lstm_safe params=6337569 hidden=512 layers=3",
+    "measured_chars_per_sec": 10.57,
+    "measured_ms_per_char": 86.04,
+    "interactive_prompt": "once upon a ",
+    "interactive_output": "time there was a tiny model that lived on a sens"
+  },
+  "scope": "Trained on a small local corpus; the model emits story-like continuations from TinyStories-style prompts. Not a general-purpose assistant and not a TinyStories-33M reproduction.",
+  "evidence": {
+    "report": "https://github.com/RecursiveIntell/esp32-s3-lstm-proof/blob/main/TINYSTORIES_H512_HARDWARE_REPORT_2026-07-03.md",
+    "weight_bytes_per_report": 4785276,
+    "sha256_verified_at_pack_time": true
+  }
+}
