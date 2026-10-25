@@ -1,5 +1,9 @@
 # ESP32 Sentinel
 
+<!-- last-verified: 2026-10-25; scope: gateway model selection and host-script limitations only -->
+
+> Review scope: gateway model selection and host-script limitations. This marker does not indicate an end-to-end or hardware run.
+
 An experimental ESP32-S3 sentinel firmware and host-side gateway workbench. The checked-in code contains two distinct demonstration paths:
 
 1. Rust firmware runs a compiled-in sine-model fixture and sends low-confidence results using a framed TCP protocol
@@ -26,7 +30,7 @@ The sensor endpoint uses Python's standard library and calls Ollama. It requires
 
 ```bash
 # From this repository root, after configuring a local Ollama instance:
-OLLAMA_MODEL=qwen2.5:0.5b python3 uno-q/server/sensor_ai_gateway.py \
+python3 uno-q/server/sensor_ai_gateway.py \
   --host 127.0.0.1 --port 8090
 ```
 
@@ -54,7 +58,7 @@ Building does not flash hardware. Before flashing, identify the actual board, se
 ## Known host-script limitations
 
 - `scripts/install.sh` is a preflight checker, not an installer; some printed setup advice is stale
-- The worked example defaults to `llama3.2:1b`, while the HTTP gateway defaults to `qwen2.5:0.5b`; set `OLLAMA_MODEL` deliberately
+- The HTTP gateway currently uses the source-level `qwen2.5:0.5b` constant and does not read `OLLAMA_MODEL`; setting that variable does not change the gateway's model. The laptop example sets `OLLAMA_MODEL=llama3.2:1b` by default and records that value in its receipt, but the current gateway still uses `qwen2.5:0.5b`, so the receipt field is not proof of which model received the request
 - The example's response-validation invocation passes the JSON file as a Python program instead of passing it as data to the heredoc validator. Its success message must not be treated as proof that those schema assertions ran
 - `scripts/doctor.sh` expects compact `"status":"ok"` text, while the gateway emits normal spaced JSON; this can produce a false failed-health result
 - The doctor also invokes the example, so it is not a read-only inspection command
